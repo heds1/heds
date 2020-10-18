@@ -1,0 +1,84 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block title %}{% endblock %} - Hedley Stirrat
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Personal CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" tyep="image/png" href="{% static 'images/favicon.ico' %}">
+</head>
+
+<body style="overflow-x: hidden;">
+    <div class="wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" style="margin-right:0", href="{% url 'home' %}">
+                <img src="{% static 'images/favicon.ico' %}">
+            </a>
+            <button class="navbar-toggler" type="button" style="border-color:transparent;" data-toggle="collapse" data-target="#main-navbar-links" aria-controls="main-navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navbar-links">
+                <ul class="navbar-nav mx-auto text-md-center text-right">
+                    <li class="nav-item">
+                        {% url 'home' as url %}
+                        <a class="nav-link" href="{{ url }}"{% if request.path == url %} style="font-weight:700;" {% endif %}>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'posts' as url %}
+                        <a class="nav-link" href="{{ url }}"{% if request.path == url %} style="font-weight:700;" {% endif %}>Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://apps.heds.nz/">Apps</a>
+                    </li>
+                    <li class="nav-item">
+                        {% url 'contact' as url %}
+                        <a class="nav-link" href="{{ url }}"{% if request.path == url %} style="font-weight:700;" {% endif %}>Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+  
+        <!-- Content container -->
+        <div id="main">
+    
+            <br />
+
+            <!-- main content of page -->
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <footer style="background-color: #868686">
+            <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-center flex-nowrap" style="padding-top: 10px; padding-bottom: 10px;">
+                <li class="nav-item">
+                    <a href="https://github.com/heds1">
+                        <img src="{% static "images/github.png" %}" style="width: 27px; height:27px" />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://stackoverflow.com/users/7978445/heds1">
+                        <img src="{% static "images/so.png" %}" style="width: 27px; height:27px" />
+                    </a>
+                </li>
+            </ul>
+            &copy; 2019&ndash;2020 Hedley Stirrat | <a id="privacy-tag" href="{% url 'privacy' %}">Privacy</a>
+        </footer>
+    </div>
+</body>
+</html>

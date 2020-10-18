@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <p style='text-align:center; color:red;' {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<p>
+    Hi, my name's Hedley.
+</p>
+<p>
+    I'm interested in data science, programming, cybersecurity and personal finance. I developed
+    this website to have somewhere to store the occasionally interesting (but mainly mundane) things
+    that I learn when I'm coding, reading, or walking my dog.
+    
+    I mostly write code in R and Python, and I particularly enjoy developing R
+    Shiny apps and Django web-apps. I'm not an expert in anything, but have a look
+    around and you might find something here useful for you. This is a personal
+    website: The opinions I express here and mine and mine alone, and have nothing
+    to do with any of my current or past employers.
+</p>
+<p>
+    If you'd like to get in touch with me, please use the form below.
+</p>
+
+<form action='/contact/' method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- load recaptcha scripts -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <div class="g-recaptcha" data-sitekey={{ RECAPTCHA_SITE_KEY }}></div>
+    <br/>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

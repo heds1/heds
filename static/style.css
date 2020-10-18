@@ -1,0 +1,256 @@
+/* ~~~~~~~~~~ MAIN CONTENT STYLES */
+/* all content (incl. mobile) */
+#main {
+    padding: 10px;
+    margin-left: 5px;
+	margin-right: 5px;
+	/* set min height content to be 100vh minus number of pixels for header and footer */
+    /* min-height: 100vh; */
+	min-height: calc(100vh - 80px - 130px) !important;
+	max-width: 100vw;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.navbar {
+	height: 80px;
+}
+
+/* center the main nav links (match with width of HS logo) */
+@media (min-width: 990px) {
+	#main-navbar-links {
+		padding-right: 48px;
+	}
+}
+
+ /* small-med screens */
+@media (min-width: 700px) and (max-width: 1000px) {
+
+    #main {
+        margin-left: 7%; 
+        margin-right: 7%;
+        min-height: 100vh;
+	}
+
+	.navbar {
+		padding-left: 7%;
+		padding-right: 7%;
+	}
+}
+ /* med-large screens */
+@media (min-width: 1001px) and (max-width: 1200px) {
+
+    #main {
+        margin-left: 15%; 
+        margin-right: 15%;
+        min-height: 100vh;
+	}
+
+	.navbar {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
+}
+ /* very large screens */
+@media (min-width: 1201px) {
+
+    #main {
+        margin-left: 25%; 
+        margin-right: 25%;
+        min-height: 100vh;
+	}
+
+	.navbar {
+		padding-left: 25%;
+		padding-right: 25%;
+	}
+}
+
+/* style hr on homepage */
+hr.homestyle {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+
+/* apply padding on mobile phones for home page */
+.snippet-text {
+	padding: 10px;
+}
+
+/* clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* black underlined links */
+#post-href {
+	color:black;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+/* ~~~~~~~~~~ CODE BLOCK STYLES ~~~~~~~~~~ */
+/*  http://web.simmons.edu/~grabiner/comm244/weekfour/code-test.html
+	`code` can be used inline; `pre` is for the actual code blocks
+	within a blog post. */
+code {
+	font-family: monospace;
+	color: black;
+	display: inline-block;
+	padding: 2px;
+	background: #f4f4f4;
+}
+  
+pre {
+	background: #f4f4f4;
+	border: 1px solid #ddd;
+	border-left: 3px solid #87CEFA;
+	color: black;
+	page-break-inside: avoid;
+	font-family: monospace;
+	font-size: 15px;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+    max-width: inherit;
+    min-width: inherit;
+	overflow: auto;
+	padding: 1em 1.5em;
+	display: block;
+	word-wrap: break-word;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+
+/* blog images: center and adjust height (especially for small screens). this
+requires you to put imgs in p tags.
+https://stackoverflow.com/questions/6169666/how-to-resize-an-image-to-fit-in-the-browser-window (answer by Neolisk)
+*/
+#main > p > img {
+	padding: 0;
+	display: block;
+	margin: 0 auto;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+
+
+/* ~~~~~~~~~~ FOOTER STYLES ~~~~~~~~~~ */
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+footer {
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 15px;
+	padding-top: 15px;
+	font-size: 14px;
+	background-color:#868686;
+	height: 120px;
+}
+
+/* font color of privacy in footer */
+#privacy-tag {
+	/* color: black; */
+	color: #212529;
+}
+
+/* padding of footer icons */
+li.nav-item {
+  padding: 10px;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+body > div > nav > a.navbar-brand.d-md-none.d-inline {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* shows tag title */
+#header_title {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* ~~~~~~~~~~ TAG INDEX STYLES ~~~~~~~~~~ */
+a.btn.tag-title {
+	font-size: 20px;
+	width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background: none;
+}
+
+
+/* tag button styles */
+a.btn {
+    background-color: #f3f5f9;
+    border: 1px solid #f3f5f9;
+    border-radius: 3px;
+    color: #405379;
+    font-size: 14px;
+    letter-spacing: .5px;
+    margin: 0 2px;
+    padding: 3px 4px 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+/* ~~~~~~~~~~ CONTACT FORM STYLES ~~~~~~~~~~ */
+#main > form > p > label {
+	/* font-weight: bold; */
+	width: 100%;
+}
+
+/* Generate a red asterisk before required fields in forms. */
+form label.required:before {
+	color: red;
+	content: "* ";
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+/* MISC TODO CATEGORIZE OR REMOVE */
+input#id_cc {
+	width: 5%
+}
+
+input {
+	width: 100%;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+textarea {
+	width: 100%;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.active-navitem {
+font-weight: bold;
+color: #343a40!important;
+}
+
+
+
+#blog {
+	position: absolute;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

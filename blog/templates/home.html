@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %} 
+
+{% block content %}
+
+    <!-- context contains five most recent blog posts -->
+    {% for post in blog_posts %}
+        
+        <div class="row">
+            <div class="column snippet-text">
+                <h2>
+                    <a id='post-href' href="{{post.get_absolute_url}}"> {{ post.title|safe }} </a>
+                </h2>
+                <p>
+                    {% for tag in post.tags.all %}
+                        <a class="btn" href="{% url 'tag' tag.name %}">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                    
+                </p>
+                <p style="color:gray; display:inline;">
+                    {{ post.published_date|date:"j F, Y" }}
+                    {% if post.modified_date is not Null %}
+                     (updated {{ post.modified_date|date:"j F, Y" }})
+                    {% endif %} 
+                    
+                </p>
+                <p style="display:inline;">
+                    &ndash; {{ post.snippet|safe }}
+                </p>
+            </div>
+        </div>
+        <hr>
+        <br />
+
+    {% endfor %}
+
+{% endblock %}

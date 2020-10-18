@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title|safe }}{% endblock title %}
+
+{% block content %}
+
+	{% if messages %}
+		{% for message in messages %}
+		<p style='text-align:center; color:red;' {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+
+	<!-- mark it as safe so able to render HTML from ckeditor -->
+	<h2>{{ post.title|safe }}</h2>
+
+	<p>
+		{% for tag in post.tags.all %}
+			<a class="btn" href="{% url 'tag' tag.name %}">
+				{{ tag.name }}
+			</a>
+		{% endfor %}
+		
+	</p>
+	<p style="color:gray; display:inline;">
+		{{ post.published_date|date:"j F, Y" }}
+		{% if post.modified_date is not Null %}
+		 (updated {{ post.modified_date|date:"j F, Y" }})
+		{% endif %} 
+		
+	</p>
+	<br />
+	<br />
+		
+	{{ post.content|safe }}
+	
+	<br />
+	<hr>
+
+	<div class="card-body">
+		<h2>
+			{% if comments.count == 1 %}
+			{{ comments.count }} comment
+			{% else %}
+			{{ comments.count }} comments
+			{% endif %}
+		</h2>
+		{% for comment in comments %}
+			<div class="comments" style="padding: 10px;">
+				<p class="font-weight-bold">
+				{{ comment.name }}
+				<span class=" text-muted font-weight-normal">
+					{{ comment.published_date|date:"j F, Y" }}
+				</span>
+				</p>
+				{{ comment.body | linebreaks }}
+			</div>
+		{% endfor %}
+	</div>
+		<div class="card-body">
+			{% if new_comment %}
+				<div class="alert alert-success" role="alert">
+					Thanks for leaving a comment! It will be approved shortly.
+				</div>
+			{% else %}
+			<h3>Leave a comment</h3>
+			<form method="post" style="margin-top: 1.3em;">
+				{% csrf_token %}
+				{{ comment_form.as_p }}
+				<!-- load recaptcha scripts -->
+				<script src='https://www.google.com/recaptcha/api.js'></script>
+				<div class="g-recaptcha" data-sitekey={{ RECAPTCHA_SITE_KEY }}></div>
+				<br/>
+				<input type="submit" value="Submit">
+			</form>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
