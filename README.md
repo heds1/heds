@@ -1,1 +1,3 @@
-#$project_name
+# heds.nz
+
+My personal website
