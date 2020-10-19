@@ -25,7 +25,8 @@ SECRET_KEY = os.getenv('MYWEBSITE_SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.heds.nz'
+    '.heds.nz',
+    '128.199.193.16',
 ]
 
 INSTALLED_APPS = [
