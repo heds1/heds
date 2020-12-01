@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
 from .sitemaps import BlogPostSitemap, TagSitemap, HomeViewSitemap, StaticViewSitemap
+from config.settings import ADMIN_URL
 
 # define objects for sitemap
 sitemaps = {
@@ -30,7 +31,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path(route='admin/', view=admin.site.urls),
+    path(route=ADMIN_URL, view=admin.site.urls),
     path(route='', view=include('blog.urls')),
     path('sitemap.xml', sitemap, 
         {'sitemaps': sitemaps},
