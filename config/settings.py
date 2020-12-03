@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('MYWEBSITE_SECRET_KEY')
 ADMIN_URL = os.getenv('HEDS_ADMIN_URL')
+MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
 
 DEBUG = False
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'blog',
+    'maps',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['blog/templates'],
+        'DIRS': [
+            'blog/templates',
+            'maps/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
