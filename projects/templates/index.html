@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects{% endblock title %} 
+
+{% block content %}
+
+<div id="intro">
+    <p>
+        These are some things that I've been working on. The R Shiny apps are hosted using the
+        free, open-source version of <a href="https://rstudio.com/products/shiny/shiny-server/">Shiny
+        Server</a>.
+        <strong>
+            Pretty much everything is still under development.
+        </strong>
+        Please <a href="https://heds.nz/contact/">let me know</a> if you find a bug or have any questions!
+    </p>
+</div>
+
+<div class="jumbotron">
+    <h1 class="display-5"><a id="post-href" href="https://apps.heds.nz/commuter/">Aotearoa
+    Commuter Visualiser</a></h1>
+    <p class="lead">R Shiny app</p>
+    <p>This app was developed as an entry to the Stats NZ There
+    and Back Again <a href="https://www.stats.govt.nz/2018-census/there-and-back-again-data-visualisation-competition/">data
+    visualisation competition.</a>
+    You can use it to visualise the journeys of Kiwis to and from
+    their places of work, as reported in the 2018 Census.</p>
+</div>
+
+<div class="jumbotron">
+    <h1 class="display-5"><a id="post-href" href="https://apps.heds.nz/fire-calc/">FI/RE
+    Calculator</a></h1>
+    <p class="lead">R Shiny app</p>
+    <p>Financial independence/early retirement (FI/RE) is a goal for
+    many people. This app can be used to make projections for your
+    personal FIRE goals. Note that this is in its early stages of development.</p>
+</div>
+
+{% endblock %}
