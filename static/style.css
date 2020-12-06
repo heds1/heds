@@ -102,6 +102,7 @@ code {
 	display: inline-block;
 	padding: 2px;
 	background: #f4f4f4;
+	font-size: 0.8rem !important;
 }
   
 pre {
