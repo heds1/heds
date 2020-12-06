@@ -38,4 +38,9 @@
 
     {% endfor %}
 
+    <p>
+        {% url 'posts' as url %}
+        <a href="{{ url }}">See more posts...</a>
+    </p>
+
 {% endblock %}

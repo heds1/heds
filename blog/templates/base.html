@@ -45,7 +45,8 @@
                         <a class="nav-link" href="{{ url }}"{% if request.path == url %} style="font-weight:700;" {% endif %}>Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://apps.heds.nz/">Apps</a>
+                        {% url 'project-index' as url %}
+                        <a class="nav-link" href="{{ url }}"{% if request.path == url %} style="font-weight:700;" {% endif %}>Projects</a>
                     </li>
                     <li class="nav-item">
                         {% url 'contact' as url %}
