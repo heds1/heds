@@ -248,7 +248,9 @@ font-weight: bold;
 color: #343a40!important;
 }
 
-
+#main-navbar-links {
+	background-color: #f8f9fa;
+}
 
 #blog {
 	position: absolute;
