@@ -5,6 +5,14 @@
 
 {% block content %}
 
+    <h2>Top categories</h2>
+    {% for tag in top_tags %}
+        <a class="btn" href="{% url 'tag' tag %}">
+            {{ tag }}
+        </a>
+    {% endfor %}
+
+
     <!-- context contains five most recent blog posts -->
     {% for post in blog_posts %}
         

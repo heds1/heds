@@ -13,8 +13,18 @@ def home(request):
     """
     blog_posts = BlogPost.objects.filter(is_published=True).order_by('-published_date')[:5]
 
+    # find three most popular tags
+    tag_dict = {}
+    for tag in Tag.objects.all():
+        tag_dict[tag.name] = tag.blog_posts.count()
+    # top_tags = Tag.objects.filter(name__in=
+    #     sorted(tag_dict, key=tag_dict.__getitem__, reverse=True)[:3]
+    # )
+    top_tags = sorted(tag_dict, key=tag_dict.__getitem__, reverse=True)[:3]
+
     context = {
         "blog_posts": blog_posts,
+        "top_tags": top_tags,
     }
 
     return render(request, 'home.html', context)
