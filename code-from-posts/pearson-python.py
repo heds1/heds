@@ -10,4 +10,8 @@ plt.xlabel("Weight")
 plt.ylabel("Miles per gallon")
 plt.show()
 
+# get r
 stats.pearsonr(mpg['mpg'], mpg['weight'])
+
+# get r2
+stats.pearsonr(mpg['mpg'], mpg['weight'])[0] ** 2
