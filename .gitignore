@@ -2,3 +2,4 @@
 env
 server-configuration.md
 code-from-posts/data
+code-from-posts/*.ipynb
