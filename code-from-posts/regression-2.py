@@ -120,3 +120,12 @@ plt.xlabel('Observation Number')
 
 # leverage plot
 sm.graphics.influence_plot(reg, size=8)
+
+reg = smf.ols('GrossUnits ~ NumDairyCattle + I(NumDairyCattle**2)', data=dat).fit()
+stdres = pd.DataFrame(reg.resid_pearson)
+plt.plot(stdres, 'o', ls='None')
+l = plt.axhline(y=0, color='r')
+plt.ylabel('Standardized Residual')
+plt.xlabel('Observation Number')
+
+sm.qqplot(reg.resid, line='r')
