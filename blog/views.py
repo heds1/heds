@@ -2,10 +2,32 @@ from django.shortcuts import render
 from blog.models import BlogPost, Tag
 from django.http import HttpResponseRedirect
 from blog.forms import ContactForm, CommentForm
-from config.settings import RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY, CONTACT_EMAIL
+from config.settings import HCAPTCHA_SECRET_KEY, CONTACT_EMAIL
 from django.contrib import messages
 from django.core.mail import send_mail
 import json, urllib.request
+
+def check_hcaptcha(token):
+    """hCaptcha validation"""
+    # set API endpoint. this expects a POST request with two parameters:
+    # the secret key and the h-captcha-response token.
+    VERIFY_URL = "https://hcaptcha.com/siteverify"
+    
+    # set the secret key
+    values = {
+        'secret': HCAPTCHA_SECRET_KEY,
+        'response': token
+    }
+    # encode the data as a POST 
+    data = urllib.parse.urlencode(values).encode()
+    # send the POST request to hcaptcha's api endpoint
+    req = urllib.request.Request(VERIFY_URL, data=data)
+    # open and parse the response
+    response = urllib.request.urlopen(req)
+    result = json.loads(response.read().decode())
+    # return the result
+    return result
+
 
 def home(request):
     """
@@ -49,18 +71,9 @@ def detail(request, slug):
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
 
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req = urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            ''' End reCAPTCHA validation '''
+            # get the response token, then check whether it's valid
+            token = request.POST.get('h-captcha-response')
+            result = check_hcaptcha(token)
 
             if result['success']:
                 # save comment to db
@@ -80,7 +93,7 @@ def detail(request, slug):
                 return HttpResponseRedirect('/comment/')
 
             else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+                messages.error(request, 'Invalid captcha. Please try again.')
 
         else:
             messages.error(request, 'Sorry, the form is invalid.')
@@ -93,7 +106,6 @@ def detail(request, slug):
         "comments": comments,
         "comment_form": comment_form,
         "new_comment": new_comment,
-        "RECAPTCHA_SITE_KEY" : RECAPTCHA_SITE_KEY,
     }
 
     return render(request, 'detail.html', context)
@@ -121,26 +133,14 @@ def contact(request):
     Render the contact form for GET and POST requests.
     """
     if request.method == 'POST':
-        pass
         # create a form instance and populate it with data from the request:
         form = ContactForm(request.POST)
 
         if form.is_valid():
+            # get the response token, then check whether it's valid
+            token = request.POST.get('h-captcha-response')
+            result = check_hcaptcha(token)
 
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req = urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            ''' End reCAPTCHA validation '''
-
-            # if recaptcha validation successful
             if result['success']:
 
                 # process the data in form.cleaned_data as required
@@ -171,14 +171,13 @@ def contact(request):
                 return HttpResponseRedirect('/thanks')
 
             else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+                messages.error(request, 'Invalid captcha. Please try again.')
 
     elif request.method == 'GET':
         form = ContactForm()
 
     context = {
         "form": form,
-        "RECAPTCHA_SITE_KEY" : RECAPTCHA_SITE_KEY,
     }
 
     return render(request, 'contact.html', context)

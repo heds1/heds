@@ -23,6 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('MYWEBSITE_SECRET_KEY')
 ADMIN_URL = os.getenv('HEDS_ADMIN_URL')
 MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
+HCAPTCHA_SECRET_KEY = os.getenv('HCAPTCHA_SECRET_KEY')
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
+
+SERVER_EMAIL = 'django@heds.nz'
 
 DEBUG = False
 
@@ -133,15 +137,7 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# recaptcha secret key. these are different between dev and production, since
-# apparently (but they don't actually say this, I just found out through banging
-# my head against the wall) you can't use the same key between production and
-# dev. so just set env vars for the keys locally and remotely
-RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY')
-RECAPTCHA_SECRET_KEY = os.environ.get('RECAPTCHA_SECRET_KEY')
-CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 
-SERVER_EMAIL = 'django@heds.nz'
 
 ADMINS = [
     ("Heds", CONTACT_EMAIL)
