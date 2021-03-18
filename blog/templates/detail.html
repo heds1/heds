@@ -67,9 +67,10 @@
 			<form method="post" style="margin-top: 1.3em;">
 				{% csrf_token %}
 				{{ comment_form.as_p }}
-				<!-- load recaptcha scripts -->
-				<script src='https://www.google.com/recaptcha/api.js'></script>
-				<div class="g-recaptcha" data-sitekey={{ RECAPTCHA_SITE_KEY }}></div>
+				<!-- load hcaptcha script -->
+				<script src="https://hcaptcha.com/1/api.js" async defer></script>
+				<!-- add empty DOM container for widget -->
+				<div class="h-captcha" data-sitekey="d1d48a3b-8a54-48cf-86ea-f0f19a186407"></div>
 				<br/>
 				<input type="submit" value="Submit">
 			</form>
