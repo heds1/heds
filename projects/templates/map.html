@@ -36,7 +36,7 @@
             accessToken: '{{MAPBOX_TOKEN|escapejs}}'
         }).addTo(mymap);
 
-        var raw_data = '{{location|escapejs}}';
+        var raw_data = '{{locations|escapejs}}';
         var data = JSON.parse(raw_data);
         L.geoJSON(data).addTo(mymap);
     </script>

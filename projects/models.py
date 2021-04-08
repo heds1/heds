@@ -6,9 +6,12 @@ class Location(models.Model):
     lat = models.FloatField()
     
     def serialize(self):
-        import json
         json_dict = {}
         json_dict['type'] = 'Feature'
         json_dict['properties'] = dict(name=self.name)
         json_dict['geometry'] = dict(type='Point', coordinates=list([self.lon,self.lat]))
-        return(json.dumps(json_dict))
+        # return(json.dumps(json_dict))
+
+        # update - allow multiple geoms
+        # return Py dict (will do json.dumps in view)
+        return(json_dict)

@@ -7,11 +7,20 @@ def index(request):
     
 
 def map(request):
-    location = Location.objects.get(id=1)
-    location_json = location.serialize()
+    # location = Location.objects.get(id=1)
+    # location_json = location.serialize()
+
+    # update - allow for multiple sites. we'll be doing json.dumps here.
+    from json import dumps
+    locations = Location.objects.all()
+    location_list = [l.serialize() for l in locations]
+    location_dict = {"type": "FeatureCollection",
+        "features": location_list}
+    location_json = dumps(location_dict)
+
     context = {
         'MAPBOX_TOKEN': MAPBOX_TOKEN,
-        'location': location_json,
+        'locations': location_json,
     }
     return render(request, 'map.html', context)
 
